@@ -16,7 +16,9 @@ app.get('/:room', (req, res) => {
 })
 
 io.on('connection', socket => {
+  console.log('connection');
   socket.on('join-room', (roomId, userId) => {
+    console.log('joined room')
     socket.join(roomId)
     socket.to(roomId).broadcast.emit('user-connected', userId)
 
@@ -26,4 +28,4 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(3000)
+server.listen(4000, () => console.log('The server runs on http://localhost:4000/'))
